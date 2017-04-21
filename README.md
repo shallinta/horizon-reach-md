@@ -2,8 +2,7 @@
 
 > A blog site which may transform an article into speech slides automatically. Material-UI will be used to reach google material design.
 
-<img src="https://github.com/zhongzhi107/universal-react-starter-kit/blob/master/static/images/touch/logo_144.png?raw=true" width="40" alt="Universal React Starter Kit" />
-<span>Built with `Universal React Starter Kit`.</span> [Know more >>](https://github.com/zhongzhi107/universal-react-starter-kit/)
+<img src="https://github.com/zhongzhi107/universal-react-starter-kit/blob/master/static/images/touch/logo_144.png?raw=true" width="40" alt="Universal React Starter Kit" /> <span>Built with `Universal React Starter Kit`.</span> [Know more about Universal](https://github.com/zhongzhi107/universal-react-starter-kit/)  
 
 
 ## Requirements
