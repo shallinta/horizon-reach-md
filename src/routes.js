@@ -19,26 +19,26 @@ export default (/* store */) => {
         }}
       />
       <Route
+        path="articles"
+        getComponent={(nextState, callback) => {
+          require.ensure([], (require) => {
+            callback(null, require('containers/Articles'));
+          });
+        }}
+      />
+      <Route
+        path="examples"
+        getComponent={(nextState, callback) => {
+          require.ensure([], (require) => {
+            callback(null, require('containers/Examples'));
+          });
+        }}
+      />
+      <Route
         path="about"
         getComponent={(nextState, callback) => {
           require.ensure([], (require) => {
             callback(null, require('containers/About'));
-          });
-        }}
-      />
-      <Route
-        path="registry"
-        getComponent={(nextState, callback) => {
-          require.ensure([], (require) => {
-            callback(null, require('containers/Registry'));
-          });
-        }}
-      />
-      <Route
-        path="chat"
-        getComponent={(nextState, callback) => {
-          require.ensure([], (require) => {
-            callback(null, require('containers/Chat'));
           });
         }}
       />

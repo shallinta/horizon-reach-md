@@ -28,13 +28,13 @@ const renderRouter = props => <ReduxAsyncConnect
 const render = (routes) => {
   match({ history, routes }, (error, redirectLocation, renderProps) => {
     ReactDOM.render(
-      <Provider store={store} key="provider">
-        <AppContainer>
+      <AppContainer>
+        <Provider store={store} key="provider">
           <Router {...renderProps} render={renderRouter} history={history}>
             {routes}
           </Router>
-        </AppContainer>
-      </Provider>,
+        </Provider>
+      </AppContainer>,
       dest
     );
   });
@@ -77,14 +77,12 @@ if (process.env.NODE_ENV !== 'production') {
 if (__DEVTOOLS__ && !window.devToolsExtension) {
   const DevTools = require('./containers/DevTools');
   ReactDOM.render(
-    <Provider store={store} key="provider">
-      <AppContainer>
-        <div>
-          {/* component */}
-          <DevTools />
-        </div>
-      </AppContainer>
-    </Provider>,
+    <AppContainer>
+      <Provider store={store} key="provider">
+        {/* component */}
+        <DevTools />
+      </Provider>
+    </AppContainer>,
     dest
   );
 }

@@ -27,7 +27,7 @@ module.exports =  {
     'react/require-default-props': 0,
     'require-jsdoc': 2
   },
-  plugins: ['react', 'import'],
+  plugins: ['react', 'import', 'jsx-a11y', 'material-ui'],
   settings: {
     'import/parser': 'babel-eslint',
     'import/resolve': {

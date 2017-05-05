@@ -40,7 +40,7 @@ export default class Home extends Component {
     const { data: { message } } = this.props;
     return (
       <div className="container">
-        <Helmet title="Home title" />
+        <Helmet title="Home" />
         <div className={styles.logo}>
           <img src={logo} alt="Universal React Starter Kit" />
           <h1>Universal React Starter Kit</h1>

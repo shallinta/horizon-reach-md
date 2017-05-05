@@ -5,9 +5,20 @@ import Helmet from 'react-helmet';
 import { push } from 'react-router-redux';
 import { asyncConnect } from 'redux-async-connect';
 import { isLoaded as isAuthLoaded, load as loadAuth } from 'redux/modules/auth';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import createPalette from 'material-ui/styles/palette';
+import createMuiTheme from 'material-ui/styles/theme';
+// import { blue } from 'material-ui/styles/colors';
 import { helmetConfig } from 'config';
-import Header from 'components/Header';
-import { pageContent } from 'containers/App/App.less';
+import AppFrame from './frame';
+
+const palette = createPalette({
+  // accent: blue,
+  type: 'light',
+});
+const theme = createMuiTheme({ palette });
+const themeContext = MuiThemeProvider.createDefaultContext({ theme });
+const styleManager = themeContext.styleManager;
 
 @asyncConnect([{
   key: 'AppInit',
@@ -60,13 +71,12 @@ export default class App extends Component {
 
   render() {
     return (
-      <div id="app">
-        <Helmet {...helmetConfig.head} />
-        <Header />
-        <div className={pageContent} key="pageContent">
+      <MuiThemeProvider theme={theme} styleManager={styleManager}>
+        <AppFrame>
+          <Helmet {...helmetConfig.head} />
           {this.props.children}
-        </div>
-      </div>
+        </AppFrame>
+      </MuiThemeProvider>
     );
   }
 }

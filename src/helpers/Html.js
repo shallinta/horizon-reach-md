@@ -77,7 +77,11 @@ export default class Html extends Component {
             in development mode. */}
           {/* ideally one could also include here the style
             for the current page (Home.scss, About.scss, etc) */}
-          { Object.keys(assets.styles).length === 0 ? <style dangerouslySetInnerHTML={{ __html: require('containers/App/App.less')._style }} /> : null }
+          {/* { Object.keys(assets.styles).length === 0 ?
+            <style
+              dangerouslySetInnerHTML={{ __html: require('containers/App/App.less')._style }} />
+            : null } */}
+          {/* <style id="jss-server-side" dangerouslySetInnerHTML={{ __html: styleManager.sheetsToString() }} /> */}
         </head>
         <body>
           <div id="content" dangerouslySetInnerHTML={{ __html: content }} />

@@ -38,7 +38,9 @@ export default Object.freeze({
       { rel: 'icon', type: 'image/png', href: '/images/favicon_16.png', sizes: '16x16' },
       { rel: 'apple-touch-icon', href: '/images/touch/logo_192.png' },
       // Make sure you update your manifest.json to match your application.
-      { rel: 'manifest', href: '/manifest.json' }
+      { rel: 'manifest', href: '/manifest.json' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons' }
     ],
     script: []
   }
