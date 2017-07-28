@@ -34,12 +34,12 @@ export default class Examples extends Component {
 
   static contextTypes = {
     styleManager: customPropTypes.muiRequired,
-  }
+  };
 
   state = {
     favoriteBtn: 'favorite_border',
     openExample: '',
-  }
+  };
 
   handleClickFavorite = () => {
     this.setState({
@@ -64,7 +64,7 @@ export default class Examples extends Component {
           <Layout
             container
             className={classes.cards}
-            justify="start"
+            justify="flex-start"
             gutter={24}
           >
             <Layout item>

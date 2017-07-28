@@ -1,5 +1,5 @@
 export default function loadAuth() {
   return Promise.resolve({
-    name: 'Zhongzhi'
+    name: 'Chen Zhan',
   });
 }

@@ -35,6 +35,14 @@ export default (/* store */) => {
         }}
       />
       <Route
+        path="cart"
+        getComponent={(nextState, callback) => {
+          require.ensure([], (require) => {
+            callback(null, require('containers/Cart'));
+          });
+        }}
+      />
+      <Route
         path="about"
         getComponent={(nextState, callback) => {
           require.ensure([], (require) => {

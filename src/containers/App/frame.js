@@ -147,8 +147,12 @@ export default class AppFrame extends Component {
           <ListItemText primary={AppFrame.getLinkNode('/examples', 'Examples', classes.listText, this.closeDrawer)} />
         </ListItem>
         <ListItem button>
+          <ListItemIcon><Icon>shopping_cart</Icon></ListItemIcon>
+          <ListItemText primary={AppFrame.getLinkNode('/cart', 'Cart', classes.listText, this.closeDrawer)} />
+        </ListItem>
+        <ListItem button>
           <ListItemIcon><Icon>more</Icon></ListItemIcon>
-          <ListItemText primary={AppFrame.getLinkNode('/about?id=100', 'About', classes.listText, this.closeDrawer)} />
+          <ListItemText primary={AppFrame.getLinkNode('/about', 'About', classes.listText, this.closeDrawer)} />
         </ListItem>
       </List>
     );

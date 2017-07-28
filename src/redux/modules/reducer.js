@@ -10,5 +10,5 @@ export default combineReducers({
   reduxAsyncConnect,
   auth,
   form,
-  home
+  home,
 });

@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { push } from 'react-router-redux';
-import { asyncConnect } from 'redux-async-connect';
-import { isLoaded as isAuthLoaded, load as loadAuth } from 'redux/modules/auth';
+// import { asyncConnect } from 'redux-async-connect';
+// import { isLoaded as isAuthLoaded, load as loadAuth } from 'redux/modules/auth';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import createPalette from 'material-ui/styles/palette';
 import createMuiTheme from 'material-ui/styles/theme';
@@ -20,21 +20,21 @@ const theme = createMuiTheme({ palette });
 const themeContext = MuiThemeProvider.createDefaultContext({ theme });
 const styleManager = themeContext.styleManager;
 
-@asyncConnect([{
-  key: 'AppInit',
-  promise: ({ store: { dispatch, getState } }) => {
-    const promises = [];
-
-    // if (!isInfoLoaded(getState())) {
-    //   promises.push(dispatch(loadInfo()));
-    // }
-    if (!isAuthLoaded(getState())) {
-      promises.push(dispatch(loadAuth()));
-    }
-
-    return Promise.all(promises);
-  }
-}])
+// @asyncConnect([{
+//   key: 'AppInit',
+//   promise: ({ store: { dispatch, getState } }) => {
+//     const promises = [];
+//
+//     // if (!isInfoLoaded(getState())) {
+//     //   promises.push(dispatch(loadInfo()));
+//     // }
+//     if (!isAuthLoaded(getState())) {
+//       promises.push(dispatch(loadAuth()));
+//     }
+//
+//     return Promise.all(promises);
+//   }
+// }])
 
 @connect(
   state => ({ user: state.auth.user }),
@@ -43,10 +43,10 @@ const styleManager = themeContext.styleManager;
 export default class App extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
-    pushState: PropTypes.func.isRequired,
-    user: PropTypes.shape({
-      name: PropTypes.string,
-    }),
+    // pushState: PropTypes.func.isRequired,
+    // user: PropTypes.shape({
+    //   name: PropTypes.string,
+    // }),
   };
 
   static defaultProps = {
@@ -59,15 +59,15 @@ export default class App extends Component {
     store: PropTypes.object.isRequired
   };
 
-  componentWillReceiveProps(nextProps) {
-    if (!this.props.user && nextProps.user) {
-      // login
-      this.props.pushState('/loginSuccess');
-    } else if (this.props.user && !nextProps.user) {
-      // logout
-      this.props.pushState('/');
-    }
-  }
+  // componentWillReceiveProps(nextProps) {
+  //   if (!this.props.user && nextProps.user) {
+  //     // login
+  //     this.props.pushState('/loginSuccess');
+  //   } else if (this.props.user && !nextProps.user) {
+  //     // logout
+  //     this.props.pushState('/');
+  //   }
+  // }
 
   render() {
     return (
