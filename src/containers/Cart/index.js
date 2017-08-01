@@ -14,6 +14,8 @@ import { Card, CardMedia, CardContent, CardActions } from 'material-ui/Card';
 import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
 import Paper from 'material-ui/Paper';
 
+import Storage from './storage';
+
 const styleSheet = createStyleSheet('Cart', theme => ({
   cards: {
     display: 'flex',
@@ -77,32 +79,51 @@ export default class Cart extends Component {
   };
 
   componentDidMount() {
-    if (!sessionStorage.length) {
-      localStorage.setItem('getProducts', Date.now());
-    }
-    window.addEventListener('storage', (event) => {
-      let newProducts;
-      switch (event.key) {
-        case 'getProducts':
-          this.broadcastSession();
-          break;
-        case 'changeProducts':
-          newProducts = JSON.parse(event.newValue);
-          if (newProducts === 'null') {
-            newProducts = null;
-          }
-          if (newProducts) {
-            const oldProducts = this.state.products;
-            const oldCartCount = oldProducts.filter(op => op.inCart).length;
-            const newCartCount = newProducts.filter(op => op.inCart).length;
-            if (oldCartCount !== newCartCount) {
-              this.updateProducts(newProducts);
-            }
-          }
-          break;
-        default:
-      }
+    // if (!sessionStorage.length) {
+    //   localStorage.setItem('getProducts', Date.now());
+    // }
+    // window.addEventListener('storage', (event) => {
+    //   let newProducts;
+    //   switch (event.key) {
+    //     case 'getProducts':
+    //       this.broadcastSession();
+    //       break;
+    //     case 'changeProducts':
+    //       newProducts = JSON.parse(event.newValue);
+    //       if (newProducts === 'null') {
+    //         newProducts = null;
+    //       }
+    //       if (newProducts) {
+    //         const oldProducts = this.state.products;
+    //         const oldCartCount = oldProducts.filter(op => op.inCart).length;
+    //         const newCartCount = newProducts.filter(op => op.inCart).length;
+    //         if (oldCartCount !== newCartCount) {
+    //           this.updateProducts(newProducts);
+    //         }
+    //       }
+    //       break;
+    //     default:
+    //   }
+    // });
+    this.storage = new Storage('mycart');
+    this.storage.registLoadEvent({
+      eventName: 'getProducts',
+      callback: () => {
+        this.storage.trigger('changeProducts', this.state.products);
+      },
     });
+    this.storage.registTriggerEvent({
+      eventName: 'changeProducts',
+      callback: (newProducts) => {
+        const oldProducts = this.state.products;
+        const oldCartCount = oldProducts.filter(op => op.inCart).length;
+        const newCartCount = newProducts.filter(op => op.inCart).length;
+        if (oldCartCount !== newCartCount) {
+          this.updateProducts(newProducts);
+        }
+      },
+    });
+    this.storage.listen();
   }
 
   getProductNodes() {
@@ -142,14 +163,14 @@ export default class Cart extends Component {
 
   broadcastSession() {
     console.log(this);
-    localStorage.setItem('changeProducts', JSON.stringify(sessionStorage.getItem('products')));
+    localStorage.setItem('changeProducts', this.state.products);
   }
 
   updateProducts(products) {
     this.setState({
       products,
     });
-    sessionStorage.setItem('products', products);
+    // sessionStorage.setItem('products', products);
   }
 
   openCart = (r) => {
@@ -176,8 +197,9 @@ export default class Cart extends Component {
     this.setState({
       products,
     }, () => {
-      sessionStorage.setItem('products', products);
-      localStorage.setItem('changeProducts', JSON.stringify(products));
+      // sessionStorage.setItem('products', JSON.stringify(products));
+      // localStorage.setItem('changeProducts', JSON.stringify(products));
+      this.storage.trigger('changeProducts', products);
     });
   }
 
